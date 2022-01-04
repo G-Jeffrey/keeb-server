@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Order" ADD COLUMN     "total" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
+ALTER COLUMN "arrival_date" DROP DEFAULT;
