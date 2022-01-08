@@ -1,6 +1,8 @@
 const express = require('express');
-// let cors = require("cors");
+let cors = require("cors");
 const app = express();
+const port = 8080;
+app.use(cors);
 app.set('trust proxy', 1);
 app.use(express.json());
 
@@ -10,7 +12,7 @@ app.use('/items', require('./routes/Items'))
 app.get('/',(req,res)=>{
     res.status(200).json({'msg':'Keeb Server'});
 })
-app.listen({ port: 8080 }, async () => {
-    console.log('Server up on http://localhost:8080')
+app.listen({ port: port }, async () => {
+    console.log(`Server up on http://localhost:${port}`)
     console.log('Connected!')
 });

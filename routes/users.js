@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
-const req_method = { method: "GET" };
 const { user } = new PrismaClient();
 let bcrypt = require("bcrypt");
 const salt = bcrypt.genSaltSync(8);
@@ -69,7 +68,7 @@ const updateInfo = (user) =>{
 }
 function login(user,req){
 	let userInfo = updateInfo(user);
-	return {'msg':"Logged in successfully.",user};
+	return {'msg':"Logged in successfully.",userInfo};
 }
 router.get('/login', async(req,res)=>{
     let { user_identification, password } = req.body;

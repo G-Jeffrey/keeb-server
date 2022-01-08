@@ -7,6 +7,7 @@ CREATE TABLE "User" (
     "last_name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "pfp" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("user_id")
 );
@@ -15,13 +16,19 @@ CREATE TABLE "User" (
 CREATE TABLE "Order" (
     "order_id" TEXT NOT NULL,
     "order_name" TEXT NOT NULL,
-    "cost" DECIMAL(65,30) NOT NULL,
-    "tax" DECIMAL(65,30) NOT NULL,
-    "shipping" DECIMAL(65,30) NOT NULL,
-    "savings" DECIMAL(65,30) NOT NULL,
+    "cost" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
+    "tax" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
+    "shipping" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
+    "savings" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
+    "total" DECIMAL(65,30) NOT NULL DEFAULT 0.00,
     "vendor" TEXT,
+    "items" INTEGER NOT NULL DEFAULT 0,
     "date_of_purchase" TIMESTAMP(3) NOT NULL,
+    "arrival_date" TIMESTAMP(3) NOT NULL,
+    "arrived" BOOLEAN NOT NULL DEFAULT false,
+    "delayed" BOOLEAN NOT NULL DEFAULT false,
     "user_id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("order_id")
 );
@@ -30,9 +37,7 @@ CREATE TABLE "Order" (
 CREATE TABLE "Item" (
     "item_id" TEXT NOT NULL,
     "item_name" TEXT NOT NULL,
-    "arrival_date" TIMESTAMP(3) NOT NULL,
-    "arrived" BOOLEAN NOT NULL DEFAULT false,
-    "delayed" BOOLEAN NOT NULL DEFAULT false,
+    "item_price" DECIMAL(65,30) NOT NULL,
     "category" TEXT NOT NULL,
     "order_id" TEXT NOT NULL,
 
