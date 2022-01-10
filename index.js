@@ -7,10 +7,10 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
 app.use(bodyParser.json())
-app.get('',async (req,res)=>{
-  res.status(200).json({'msg':'Keeb Server'});
+app.get('', async (req,res)=>{
+  res.json({'msg':'Keeb Server'});
 })
-app.get(`/api`, async (req, res) => {
+app.get(`/api`,  (req, res) => {
   res.json({ up: true });
 })
 app.use('/users', require('./routes/Users'));
