@@ -12,7 +12,7 @@ router.get('',async(req,res)=>{ // Find all order of user
             user_id: user_id
 		},
     });
-    res.status(200).json(find_order);
+    return res.status(200).json(find_order);
 });
 
 router.post("",async(req,res)=>{  // creates an item

@@ -5,7 +5,7 @@ router.get('',async(req,res)=>{ // Find all order of user by category
     const {user_id, category, active} = req.body;
     const past = (active) ? 'gt' : 'lt';
     if(!user_id){
-        res.status(203).json({'msg':'Not logged in.'});
+        return res.status(203).json({'msg':'Not logged in.'});
     }
     const find_order = await order.findMany({
         where: {

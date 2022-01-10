@@ -1,17 +1,12 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
 const { PrismaClient } = require('@prisma/client');
 const port = process.env.PORT || 8080;
 const prisma = new PrismaClient();
 const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
-// app.use(bodyParser.json())
-// app.get('', async (req,res)=>{
-//   res.json({'msg':'Keeb Server'});
-// })
 app.get('', (req,res)=>{
-  res.json({'msg':'Toki Server'});
+  res.status(200).json({'msg':'Toki Server'});
 })
 app.get(`/api`,  (req, res) => {
   res.json({'up':true});
