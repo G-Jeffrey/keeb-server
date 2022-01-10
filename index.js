@@ -10,16 +10,13 @@ app.use(bodyParser.json())
 // app.get('', async (req,res)=>{
 //   res.json({'msg':'Keeb Server'});
 // })
-app.get('/intro', (req,res)=>{
-  res.json({'msg':'Keeb Server'});
-})
 app.get('', (req,res)=>{
-  res.json({'msg':'Keeb Server'});
+  res.json({'msg':'Toki Server'});
 })
 app.get(`/api`,  (req, res) => {
-  res.json({'msg':'Keeb Server'});
+  res.json({'up':true});
 })
-// app.use('/users', require('./routes/Users'));
+app.use('/users', require('./routes/Users'));
 // app.use('/orders', require('./routes/Orders'))
 // app.use('/items', require('./routes/Items'))
 
