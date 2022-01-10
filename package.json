@@ -4,9 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "prisma generate && prisma migrate deploy",
-    "prisma:generate": "prisma generate",
-    "dev": "PORT=8080 node index.js",
     "start": "node index.js"
   },
   "keywords": [],
