@@ -7,7 +7,13 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
 app.use(bodyParser.json())
-app.get('', async (req,res)=>{
+// app.get('', async (req,res)=>{
+//   res.json({'msg':'Keeb Server'});
+// })
+app.get('/intro', (req,res)=>{
+  res.json({'msg':'Keeb Server'});
+})
+app.get('', (req,res)=>{
   res.json({'msg':'Keeb Server'});
 })
 app.get(`/api`,  (req, res) => {
