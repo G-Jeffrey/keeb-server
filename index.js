@@ -20,7 +20,7 @@ app.get('/',(req,res)=>{
     res.status(200).json({'msg':'Keeb Server'});
 })
 
-app.listen({ port: port }, async () => {
+app.listen({ port: 8080 }, async () => {
     console.log(`Server up on http://localhost:${port}`)
     console.log('Connected!')
 });
