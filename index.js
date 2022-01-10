@@ -1,13 +1,12 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const { PrismaClient } = require('@prisma/client');
 const port = process.env.PORT || 8080;
 const prisma = new PrismaClient();
-const users = require('./routes/users');
 const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 // app.get('', async (req,res)=>{
 //   res.json({'msg':'Keeb Server'});
 // })
@@ -17,10 +16,9 @@ app.get('', (req,res)=>{
 app.get(`/api`,  (req, res) => {
   res.json({'up':true});
 })
-app.use('/users', users);
-// app.use('/orders', require('./routes/Orders'))
-// app.use('/items', require('./routes/Items'))
-
+app.use('/users', require('./routes/users'));
+app.use('/orders', require('./routes/orders'))
+app.use('/items', require('./routes/items'))
 
 app.listen({ port: port }, async () => {
   console.log(`Server up on http://localhost:${port}`)
