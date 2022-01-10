@@ -17,11 +17,11 @@ app.get('', (req,res)=>{
   res.json({'msg':'Keeb Server'});
 })
 app.get(`/api`,  (req, res) => {
-  res.json({ up: true });
+  res.json({'msg':'Keeb Server'});
 })
-app.use('/users', require('./routes/Users'));
-app.use('/orders', require('./routes/Orders'))
-app.use('/items', require('./routes/Items'))
+// app.use('/users', require('./routes/Users'));
+// app.use('/orders', require('./routes/Orders'))
+// app.use('/items', require('./routes/Items'))
 
 
 app.listen({ port: port }, async () => {
