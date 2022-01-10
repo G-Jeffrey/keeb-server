@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { PrismaClient } = require('@prisma/client');
 const port = process.env.PORT || 8080;
 const prisma = new PrismaClient();
-const users = require('./routes/Users');
+const users = require('./routes/users');
 const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
