@@ -77,10 +77,10 @@ router.get('/login', async(req,res)=>{
 			OR: [{ email: user_identification }, { username: user_identification }],
 		},
 	});
-	if(!users) res.status(203).json({ 'msg': "Username/email is not found" });
+	if(!users) return res.status(203).json({ 'msg': "Username/email is not found" });
 	password = bcrypt.compareSync(password,users.password);
 	if(password){
-		res.status(200).json(login(users,req));
-	}else res.status(203).json({'msg':'Incorrect password'});
+		return res.status(200).json(login(users,req));
+	}else return res.status(203).json({'msg':'Incorrect password'});
 });
 module.exports = router;
