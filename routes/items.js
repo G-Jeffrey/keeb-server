@@ -30,7 +30,7 @@ router.get('',async(req,res)=>{ // Find all order of user by category
     }
     for(let i = 0; i < find_order.length;i++)
         await get_items(find_order[i].order_id);
-    res.status(200).json(list);
+    return res.status(200).json(list);
 });
 module.exports = router;
 

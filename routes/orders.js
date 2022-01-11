@@ -5,7 +5,7 @@ const { order, item } = new PrismaClient();
 router.get('',async(req,res)=>{ // Find all order of user
     const {user_id} = req.body;
     if(!user_id){
-        res.status(203).json({'msg':'Not logged in.'});
+        return res.status(203).json({'msg':'Not logged in.'});
     }
     const find_order = await order.findMany({
         where: {
@@ -29,7 +29,7 @@ router.post("",async(req,res)=>{  // creates an item
             user_id
         }
     });
-    res.json(create_order);
+    return res.json(create_order);
 });
 
 router.delete('/',async(req,res)=>{ // Find specific order of user and all the items of the order
@@ -52,13 +52,13 @@ router.delete('/',async(req,res)=>{ // Find specific order of user and all the i
 			order_id: order_id,
 		}
     });
-    res.status(200).json(find_order);
+    return res.status(200).json(find_order);
 });
 
 router.put('/',async(req,res)=>{ // Edit order from user
     let {order_id, user_id, order_name, vendor, date_of_purchase, arrival_date, tax, savings, shipping} = req.body;
     if(!user_id){
-        res.status(203).json({'msg':'Not logged in.'});
+        return res.status(203).json({'msg':'Not logged in.'});
     }
     date_of_purchase = new Date(date_of_purchase);
     arrival_date = new Date(arrival_date);
@@ -89,14 +89,14 @@ router.put('/',async(req,res)=>{ // Edit order from user
             }
         }
     });
-    res.json(update_order);
+    return res.json(update_order);
 });
 
 
 router.get('/search',async(req,res)=>{ // Find specific order of user
     const {order_name, user_id} = req.body;
     if(!user_id){
-        res.status(203).json({'msg':'Not logged in.'});
+        return res.status(203).json({'msg':'Not logged in.'});
     }
     const find_order = await order.findMany({
         where: {
@@ -110,13 +110,13 @@ router.get('/search',async(req,res)=>{ // Find specific order of user
             cost: 'desc'
         }
     });
-    res.status(200).json(find_order);
+    return res.status(200).json(find_order);
 });
 
 router.post("/:order_id",async(req,res)=>{  // add item to order
     let {item_name, item_price, category, user_id} = req.body;
     if(!user_id){
-        res.status(203).json({'msg':'Not logged in'});
+        return res.status(203).json({'msg':'Not logged in'});
     }
     item_price = parseFloat(item_price).toFixed(2);
     let order_id = req.params.order_id;
@@ -127,7 +127,7 @@ router.post("/:order_id",async(req,res)=>{  // add item to order
         }
     });
     if(!check_owner){
-        res.status(203).json({'msg':'Invalid Order Number'});
+        return res.status(203).json({'msg':'Invalid Order Number'});
     }
     const create_item = await item.create({
         data:{
@@ -153,7 +153,7 @@ router.post("/:order_id",async(req,res)=>{  // add item to order
             }
         }
     });
-    res.json(create_item);
+    return res.json(create_item);
 });
 
 router.put("/:order_id",async(req,res)=>{  // edit item to order
@@ -189,7 +189,7 @@ router.put("/:order_id",async(req,res)=>{  // edit item to order
             category: category
         }
     })
-    res.json(update_item);
+    return res.json(update_item);
 });
 
 router.delete("/:order_id",async(req,res)=>{  // edit item to order

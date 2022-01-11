@@ -56,7 +56,7 @@ router.post("/sign_up", async (req, res) => {
             pfp,
         }
     });
-    res.json(createUser);
+    return res.json(createUser);
 });
 const updateInfo = (user) =>{
 	return {
