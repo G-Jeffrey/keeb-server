@@ -1,9 +1,11 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const port = process.env.PORT || 8080;
+const cors = require('cors');
 const prisma = new PrismaClient();
 const app = express();
 app.set('trust proxy', 1);
+app.use(cors());
 app.use(express.json());
 app.get('', (req,res)=>{
   res.status(200).json({'msg':'Toki Server'});
