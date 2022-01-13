@@ -72,6 +72,7 @@ function login(user,req){
 }
 router.get('/login', async(req,res)=>{
     let { user_identification, password } = req.body;
+	console.log(user_identification,password);
 	const users = await user.findFirst({
 		where: {
 			OR: [{ email: user_identification }, { username: user_identification }],
@@ -79,6 +80,7 @@ router.get('/login', async(req,res)=>{
 	});
 	if(!users) return res.status(203).json({ 'msg': "Username/email is not found" });
 	password = bcrypt.compareSync(password,users.password);
+	console.log(password);
 	if(password){
 		return res.status(200).json(login(users,req));
 	}else return res.status(203).json({'msg':'Incorrect password'});
