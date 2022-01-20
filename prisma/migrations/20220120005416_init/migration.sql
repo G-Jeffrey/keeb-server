@@ -28,6 +28,7 @@ CREATE TABLE "Order" (
     "arrived" BOOLEAN NOT NULL DEFAULT false,
     "delayed" BOOLEAN NOT NULL DEFAULT false,
     "user_id" TEXT NOT NULL,
+    "image_url" TEXT NOT NULL DEFAULT E'',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("order_id")
