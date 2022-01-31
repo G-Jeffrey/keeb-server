@@ -1,17 +1,20 @@
+
 const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
 const { order, item } = new PrismaClient();
 router.get('',async(req,res)=>{ // Find all order of user by category
-    const {user_id, category, active} = req.body;
-    const past = (active) ? 'gt' : 'lt';
+    // @ts-ignore
+    const user_id = String(req.query['user_id']), start_date = new Date(req.query['start_date']), end_date = new Date(req.query['end_date']);
     if(!user_id){
         return res.status(203).json({'msg':'Not logged in.'});
     }
+    const category = ['Keyboard','Keycap','Switches','Artisan','Misc'];
     const find_order = await order.findMany({
         where: {
-            user_id: user_id,
-            arrival_date: {
-                [past]: new Date()
+            user_id,
+            date_of_purchase:{
+                gte: start_date,
+                lte: end_date
             }
 		},
         select:{
@@ -23,7 +26,6 @@ router.get('',async(req,res)=>{ // Find all order of user by category
         const items = await item.findMany({
             where:{
                 order_id: order_id,
-                category: category
             }
         });
         list.push(...items);

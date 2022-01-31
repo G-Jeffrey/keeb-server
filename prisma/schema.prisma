@@ -32,8 +32,8 @@ model Order{
   total Decimal @default(0.00)
   vendor String?
   items Int @default(0)
-  date_of_purchase DateTime
-  arrival_date DateTime
+  date_of_purchase DateTime?
+  arrival_date DateTime?
   arrived Boolean @default(false)
   delayed Boolean @default(false)
   user_id String
