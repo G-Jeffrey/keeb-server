@@ -240,6 +240,9 @@ router.put("/:order_id", async (req, res) => {  // edit item to order
         data: {
             cost: {
                 increment: difference
+            },
+            total:{
+                increment: difference
             }
         }
     });
