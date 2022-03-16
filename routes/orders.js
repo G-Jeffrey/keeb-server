@@ -221,6 +221,7 @@ router.put("/:order_id", async (req, res) => {  // edit item to order
     let { item_id, item_name, item_price, category } = req.body;
     let order_id = req.params.order_id;
     item_price = parseFloat(item_price);
+    
     const current_price = await item.findFirst({
         where: {
             item_id
@@ -229,7 +230,9 @@ router.put("/:order_id", async (req, res) => {  // edit item to order
             item_price: true
         }
     });
+    console.log('curr_price',current_price);
     const difference = parseFloat((item_price - current_price.item_price).toFixed(2));
+    console.log('diff',difference);
     await order.update({
         where: {
             order_id

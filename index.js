@@ -20,6 +20,6 @@ app.use('/orders', require('./routes/orders'))
 app.use('/items', require('./routes/items'))
 
 app.listen({ port: port }, async () => {
-  console.log(`Server up on http://localhost:${port}`)
+  // console.log(`Server up on http://localhost:${port}`)
   console.log('Connected!')
 });
