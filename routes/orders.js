@@ -55,11 +55,11 @@ const createURL = async (data) => {
     };
     let res;
     try{
-        res = await fetch("https://api.imgur.com/3/image", requestOptions).then(res => res.json());
-    }catch (err){
         res = await fetch("https://api.imgur.com/3/upload", requestOptions).then(res => res.json());
+    }catch (err){
+        res = await fetch("https://api.imgur.com/3/image", requestOptions).then(res => res.json()).catch(err=> console.log(err));
     }
-    console.log(res)
+    console.log(res, "result")
     return res;
 }
 router.post("", async (req, res) => {  // creates an order
