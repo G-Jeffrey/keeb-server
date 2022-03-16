@@ -53,10 +53,14 @@ const createURL = async (data) => {
         body: formdata,
         redirect: 'follow'
     };
-
-    return await fetch("https://api.imgur.com/3/image", requestOptions)
-        .then(res => res.json())
-        .catch(err => console.log('error', err));
+    let res;
+    try{
+        res = await fetch("https://api.imgur.com/3/image", requestOptions).then(res => res.json());
+    }catch (err){
+        res = await fetch("https://api.imgur.com/3/upload", requestOptions).then(res => res.json());
+    }
+    console.log(res)
+    return res;
 }
 router.post("", async (req, res) => {  // creates an order
     let { order_name, vendor, date_of_purchase, arrival_date, user_id, tax, shipping, savings, image_url } = req.body;
