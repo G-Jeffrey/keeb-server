@@ -55,8 +55,10 @@ const createURL = async (data) => {
         redirect: 'follow'
     };
     let res;
+    console.log('attempting connections');
     try{
         res = await fetch("https://api.imgur.com/3/upload", requestOptions).then(res => res.json());
+        console.log(res);
     }catch (err){
         res = await fetch("https://api.imgur.com/3/image", requestOptions).then(res => res.json()).catch(err=> console.log(err));
     }
