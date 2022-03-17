@@ -5,7 +5,7 @@ const { json } = require("body-parser");
 const { order, item } = new PrismaClient();
 const fetchPromise = import('node-fetch').then(mod => mod.default);
 const fetch = (...args) => fetchPromise.then(fetch => fetch(...args));
-const FormData = require('form-data');
+const FormData = require('formdata-node');
 const client_id = process.env.imgur_client_id;
 // const Headers = require('headers');
 
