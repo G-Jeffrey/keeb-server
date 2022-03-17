@@ -54,6 +54,7 @@ const createURL = async (data) => {
         body: formdata,
         redirect: 'follow'
     };
+    console.log(formdata);
     try{
         await fetch("https://api.imgur.com/3/upload", requestOptions).then(res => res.json());
     }catch (err){
