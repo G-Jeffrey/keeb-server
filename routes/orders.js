@@ -5,7 +5,7 @@ const { json } = require("body-parser");
 const { order, item } = new PrismaClient();
 const fetchPromise = import('node-fetch').then(mod => mod.default);
 const fetch = (...args) => fetchPromise.then(fetch => fetch(...args));
-const FormData = require('formdata-node');
+const FormData = require('form-data');
 const client_id = process.env.imgur_client_id;
 // const Headers = require('headers');
 
@@ -55,12 +55,8 @@ const createURL = async (data) => {
         body: formdata,
         redirect: 'follow'
     };
-    console.log(    );
-    try{
-        await fetch("https://api.imgur.com/3/upload", requestOptions).then(res => res.json());
-    }catch (err){
-        await fetch("https://api.imgur.com/3/image", requestOptions).then(res => res.json()).catch(err=> console.log(err));
-    }
+    let res;
+    res = await fetch("https://api.imgur.com/3/image", requestOptions).then(res => res.json()).catch(err=> console.log(err));
     return res;
 }
 router.post("", async (req, res) => {  // creates an order
@@ -73,27 +69,25 @@ router.post("", async (req, res) => {  // creates an order
     } else {
         image_url = "https://i.imgur.com/Vx6P5nq.png"
     }
-    // const total = parseFloat(shipping) + parseFloat(tax) - parseFloat(savings);
-    // date_of_purchase = new Date(date_of_purchase);
-    // arrival_date = new Date(arrival_date);
-    // order_name = order_name.trim();
-    // const create_order = await order.create({
-    //     data: {
-    //         order_name,
-    //         vendor,
-    //         date_of_purchase,
-    //         arrival_date,
-    //         user_id,
-    //         tax,
-    //         shipping,
-    //         savings,
-    //         image_url,
-    //         total
-    //     }
-    // });
-    console.log(image_url)
-    return res.json({});
-    // return res.json(create_order);
+    const total = parseFloat(shipping) + parseFloat(tax) - parseFloat(savings);
+    date_of_purchase = new Date(date_of_purchase);
+    arrival_date = new Date(arrival_date);
+    order_name = order_name.trim();
+    const create_order = await order.create({
+        data: {
+            order_name,
+            vendor,
+            date_of_purchase,
+            arrival_date,
+            user_id,
+            tax,
+            shipping,
+            savings,
+            image_url,
+            total
+        }
+    });
+    return res.json(create_order);
 });
 
 router.delete('/', async (req, res) => { // Find specific order of user and all the items of the order
