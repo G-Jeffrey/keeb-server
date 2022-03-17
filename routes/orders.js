@@ -2,7 +2,8 @@
 const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
 const { order, item } = new PrismaClient();
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetchPromise = import('node-fetch').then(mod => mod.default);
+const fetch = (...args) => fetchPromise.then(fetch => fetch(...args));
 const FormData = require('form-data');
 const client_id = process.env.imgur_client_id;
 // const Headers = require('headers');
